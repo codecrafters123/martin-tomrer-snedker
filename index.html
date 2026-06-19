@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="da" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin S Tømrer+Snedker v/Martin Schmidt - Borup</title>
+    <!-- Tailwind CSS til professionel og avanceret styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts til et eksklusivt nordisk arkitekt- og håndværkerudtryk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome til rige ikoner -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Underside-router overgange */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#faf9f6] text-slate-900 antialiased min-h-screen flex flex-col selection:bg-amber-600 selection:text-white">
+
+    <!-- TOP BAR (Informationer) -->
+    <div class="bg-amber-950 text-amber-100/90 text-xs py-2 px-4 sm:px-6 lg:px-8 border-b border-amber-900">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span><i class="fa-solid fa-location-dot text-amber-500 mr-1.5"></i> Græsmarken 23, 4140 Borup</span>
+                <span class="hidden md:inline">|</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-id-card text-amber-500 mr-1.5"></i> CVR: 29485798</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span><i class="fa-solid fa-shield-halved text-amber-500 mr-1.5"></i> Omfattet af Byg Garanti</span>
+                <a href="tel:22510587" class="font-bold text-amber-400 hover:text-white transition-colors"><i class="fa-solid fa-phone mr-1"></i> 22 51 05 87</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-[#faf9f6]/95 backdrop-blur-md border-b border-slate-200/60 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-22 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#forside" onclick="navigateTo('forside')" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 bg-amber-800 rounded-lg flex items-center justify-center text-amber-50 shadow-md group-hover:bg-amber-900 transition-colors">
+                    <i class="fa-solid fa-compass-drafting text-2xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold tracking-tight text-slate-900 uppercase leading-none">Martin S</span>
+                    <span class="text-[10px] font-extrabold tracking-widest text-amber-700 uppercase mt-1">Tømrer & Snedker</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8 font-medium text-sm">
+                <a href="#forside" onclick="navigateTo('forside')" class="nav-link py-2 text-slate-800 hover:text-amber-700 transition-colors active-nav font-bold" id="nav-forside">Forside</a>
+                <a href="#ydelser" onclick="navigateTo('ydelser')" class="nav-link py-2 text-slate-600 hover:text-amber-700 transition-colors" id="nav-ydelser">Vores Ydelser</a>
+                <a href="#projekter" onclick="navigateTo('projekter')" class="nav-link py-2 text-slate-600 hover:text-amber-700 transition-colors" id="nav-projekter">Portfolio</a>
+                <a href="#om-os" onclick="navigateTo('om-os')" class="nav-link py-2 text-slate-600 hover:text-amber-700 transition-colors" id="nav-om-os">Om Martin</a>
+                <a href="#kontakt" onclick="navigateTo('kontakt')" class="nav-link py-2 text-slate-600 hover:text-amber-700 transition-colors" id="nav-kontakt">Kontakt</a>
+            </nav>
+
+            <!-- CTA Knapper -->
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="#beregner" onclick="navigateTo('forside'); setTimeout(() => document.getElementById('beregner').scrollIntoView({behavior: 'smooth'}), 100)" class="text-xs font-bold text-amber-800 hover:text-amber-900 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-700"></i> Prisberegner
+                </a>
+                <a href="#kontakt" onclick="navigateTo('kontakt')" class="bg-slate-900 hover:bg-slate-800 text-[#faf9f6] px-5 py-2.5 rounded-xl text-xs font-bold shadow-md transition-all uppercase tracking-wider">
+                    Få Uforpligtende Tilbud
+                </a>
+            </div>
+
+            <!-- Mobil Menu Knap -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-800 hover:text-amber-700 focus:outline-none">
+                <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobil Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-22 left-0 w-full bg-[#faf9f6] border-b border-slate-200 shadow-xl px-4 py-6 space-y-4">
+            <a href="#forside" onclick="navigateTo('forside'); toggleMobileMenu()" class="block font-medium py-2 border-b border-slate-100 text-slate-800 hover:text-amber-700">Forside</a>
+            <a href="#ydelser" onclick="navigateTo('ydelser'); toggleMobileMenu()" class="block font-medium py-2 border-b border-slate-100 text-slate-800 hover:text-amber-700">Vores Ydelser</a>
+            <a href="#projekter" onclick="navigateTo('projekter'); toggleMobileMenu()" class="block font-medium py-2 border-b border-slate-100 text-slate-800 hover:text-amber-700">Portfolio & Galleri</a>
+            <a href="#om-os" onclick="navigateTo('om-os'); toggleMobileMenu()" class="block font-medium py-2 border-b border-slate-100 text-slate-800 hover:text-amber-700">Om Martin Schmidt</a>
+            <a href="#kontakt" onclick="navigateTo('kontakt'); toggleMobileMenu()" class="block font-medium py-2 text-slate-800 hover:text-amber-700">Kontakt</a>
+            <div class="pt-4 flex flex-col gap-3">
+                <a href="tel:22510587" class="text-center bg-amber-100 text-amber-900 py-3 rounded-xl font-bold"><i class="fa-solid fa-phone mr-2"></i> Ring Ring Op</a>
+                <a href="#kontakt" onclick="navigateTo('kontakt'); toggleMobileMenu()" class="text-center bg-slate-900 text-[#faf9f6] py-3 rounded-xl font-bold">Uforpligtende Tilbud</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOAST NOTIFIKATION (Viser feedback ved indsendelse) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 border border-slate-800">
+        <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-slate-900 font-bold">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <p class="font-bold text-sm" id="toast-title">Handling udført</p>
+            <p class="text-xs text-slate-400" id="toast-desc">Vi kontakter dig snarest muligt.</p>
+        </div>
+    </div>
+
+
+    <!-- ================= UNDERSIDE: FORSIDE ================= -->
+    <main id="page-forside" class="page-section active flex-grow">
+        <!-- Hero Sektion -->
+        <section class="relative bg-slate-950 text-white py-24 lg:py-36 overflow-hidden">
+            <div class="absolute inset-0 opacity-40 mix-blend-overlay">
+                <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1920&q=80" alt="Professionelt træarbejde" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-transparent"></div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl">
+                    <span class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold tracking-widest uppercase text-xs px-3.5 py-1.5 rounded-full mb-6">
+                        Martin Schmidt • Kvalitet Siden 2006
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
+                        Snedkerdetaljen i det solide <span class="italic text-amber-400 font-normal">tømrerarbejde</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed font-light">
+                        Vi udfører kompromisløst håndværk i Borup, Køge, Roskilde og på resten af Midtsjælland. Fra smukke træterrasser til specialdesignede snedkerløsninger og totalrenoveringer.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 items-center">
+                        <a href="#kontakt" onclick="navigateTo('kontakt')" class="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-[#faf9f6] px-8 py-4 rounded-xl font-bold shadow-lg transition-all text-center uppercase tracking-wider text-sm">
+                            Book en opmåling
+                        </a>
+                        <a href="#ydelser" onclick="navigateTo('ydelser')" class="w-full sm:w-auto border border-slate-700 bg-slate-900/40 hover:bg-slate-900/80 text-white px-8 py-4 rounded-xl font-bold transition-all text-center text-sm">
+                            Se vores ydelser
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fordele -->
+        <section class="py-10 bg-[#f4f2eb] border-b border-slate-200/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center lg:text-left">
+                <div class="flex flex-col lg:flex-row items-center gap-4 p-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800"><i class="fa-solid fa-shield-halved text-xl"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Byg Garanti Medlem</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Din tryghed mod fejl og mangler</p>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row items-center gap-4 p-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800"><i class="fa-solid fa-tree text-xl"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Kvalitetsmaterialer</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Slidstærkt træ udvalgt til det danske vejr</p>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row items-center gap-4 p-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800"><i class="fa-solid fa-calendar-check text-xl"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Etableret i 2006</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">20 års uafbrudt erfaring som mester</p>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row items-center gap-4 p-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800"><i class="fa-solid fa-calculator text-xl"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm">Gennemskuelige tilbud</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Aftalte priser uden skjulte ekstraregninger</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERAKTIV PRISBEREGNER -->
+        <section id="beregner" class="py-16 bg-white border-b border-slate-200/40">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-amber-700/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -left-32 -top-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+
+                    <div class="relative">
+                        <div class="text-center mb-8">
+                            <span class="text-amber-400 font-bold uppercase tracking-wider text-xs">Vejledende prisoverslag</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold mt-1">Beregn prisen på dit næste projekt</h2>
+                            <p class="text-slate-400 text-sm mt-2 max-w-lg mx-auto">Prøv vores lynhurtige prisberegner og få et uforpligtende estimat inkl. arbejdsløn og materialer.</p>
+                        </div>
+
+                        <!-- Trinindikatorer -->
+                        <div class="flex items-center justify-center gap-4 mb-8 text-xs font-semibold text-slate-400">
+                            <span class="step-indicator active text-amber-400" id="step1-indicator">1. Projekt</span>
+                            <span class="h-px w-8 bg-slate-800"></span>
+                            <span class="step-indicator" id="step2-indicator">2. Størrelse</span>
+                            <span class="h-px w-8 bg-slate-800"></span>
+                            <span class="step-indicator" id="step3-indicator">3. Materialer</span>
+                            <span class="h-px w-8 bg-slate-800"></span>
+                            <span class="step-indicator" id="step4-indicator">4. Estimat</span>
+                        </div>
+
+                        <!-- Step 1 -->
+                        <div id="step1" class="step-container space-y-4">
+                            <p class="text-center font-medium text-slate-200 mb-2">Vælg din projekttype:</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <button type="button" onclick="selectCalcProject('terrasse', 1400)" class="calc-btn p-6 rounded-2xl bg-slate-800 border-2 border-transparent hover:border-amber-600 transition-all text-center group cursor-pointer">
+                                    <i class="fa-solid fa-tree text-3xl text-amber-400 mb-3 block group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-bold text-sm block">Flot Træterrasse</span>
+                                    <span class="text-xs text-slate-400 mt-1 block">Pris pr. m² fra 1.400,-</span>
+                                </button>
+                                <button type="button" onclick="selectCalcProject('gulv', 850)" class="calc-btn p-6 rounded-2xl bg-slate-800 border-2 border-transparent hover:border-amber-600 transition-all text-center group cursor-pointer">
+                                    <i class="fa-solid fa-border-all text-3xl text-amber-400 mb-3 block group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-bold text-sm block">Træ- / Sildebensgulv</span>
+                                    <span class="text-xs text-slate-400 mt-1 block">Pris pr. m² fra 850,-</span>
+                                </button>
+                                <button type="button" onclick="selectCalcProject('hegn', 950)" class="calc-btn p-6 rounded-2xl bg-slate-800 border-2 border-transparent hover:border-amber-600 transition-all text-center group cursor-pointer">
+                                    <i class="fa-solid fa-ellipsis-vertical text-3xl text-amber-400 mb-3 block group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-bold text-sm block">Kvalitetshegn / Stakit</span>
+                                    <span class="text-xs text-slate-400 mt-1 block">Pris pr. lbm fra 950,-</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div id="step2" class="step-container hidden space-y-6">
+                            <p class="text-center font-medium text-slate-200">Indtast cirka omfang:</p>
+                            <div class="max-w-xs mx-auto space-y-4">
+                                <div>
+                                    <label class="block text-xs text-slate-400 mb-1 font-bold uppercase tracking-wider" id="calc-dim-label">Antal kvadratmeter (m²)</label>
+                                    <input type="number" id="calc-size" value="25" min="1" max="500" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-center font-bold text-lg">
+                                </div>
+                                <div class="flex gap-4">
+                                    <button onclick="changeStep(1)" class="w-1/2 bg-slate-800 hover:bg-slate-700 text-slate-300 py-3 rounded-xl text-sm font-semibold transition-colors cursor-pointer">Tilbage</button>
+                                    <button onclick="processStep2()" class="w-1/2 bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-xl text-sm font-bold transition-colors cursor-pointer">Næste</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div id="step3" class="step-container hidden space-y-6">
+                            <p class="text-center font-medium text-slate-200">Vælg materialekvalitet:</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                                <button onclick="selectCalcMaterial('standard', 1.0)" class="mat-btn p-4 rounded-xl bg-slate-800 border-2 border-transparent hover:border-amber-600 text-center cursor-pointer">
+                                    <span class="font-bold text-sm block">Imprægneret Fyr</span>
+                                    <span class="text-xs text-slate-400 mt-1 block">Økonomisk og holdbart</span>
+                                </button>
+                                <button onclick="selectCalcMaterial('premium', 1.4)" class="mat-btn p-4 rounded-xl bg-slate-800 border-2 border-transparent hover:border-amber-600 text-center cursor-pointer">
+                                    <span class="font-bold text-sm block">Dansk Lærk / Douglas</span>
+                                    <span class="text-xs text-amber-400 mt-1 block">Smukt og naturligt</span>
+                                </button>
+                                <button onclick="selectCalcMaterial('eksklusiv', 2.1)" class="mat-btn p-4 rounded-xl bg-slate-800 border-2 border-transparent hover:border-amber-600 text-center cursor-pointer">
+                                    <span class="font-bold text-sm block">Ipé / Hårdttræ</span>
+                                    <span class="text-xs text-slate-400 mt-1 block">Eksklusivt & livslang levetid</span>
+                                </button>
+                            </div>
+                            <div class="flex justify-center gap-4 max-w-xs mx-auto">
+                                <button onclick="changeStep(2)" class="w-1/2 bg-slate-800 hover:bg-slate-700 text-slate-300 py-3 rounded-xl text-sm font-semibold transition-colors cursor-pointer">Tilbage</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div id="step4" class="step-container hidden text-center space-y-6">
+                            <div class="p-6 bg-slate-800 rounded-2xl max-w-md mx-auto border border-slate-700">
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">Estimeret totalpris inkl. moms & kørsel</p>
+                                <p class="text-3xl sm:text-4xl font-extrabold text-amber-400 mt-2" id="calc-final-price">0,- kr.</p>
+                                <p class="text-[10px] text-slate-500 mt-1">Bemærk: Prisen er vejledende og bekræftes endeligt ved besigtigelse.</p>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto justify-center">
+                                <button onclick="resetCalc()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-6 py-3.5 rounded-xl text-sm font-semibold transition-colors cursor-pointer">Beregn forfra</button>
+                                <button onclick="navigateTo('kontakt'); document.getElementById('kontakt-message').value = 'Hej Martin. Jeg har brugt jeres prisberegner på hjemmesiden til at estimere mit projekt til cirka ' + document.getElementById('calc-final-price').innerText + '. Jeg vil meget gerne aftale et uforpligtende møde og opmåling.';" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3.5 rounded-xl text-sm font-bold transition-colors cursor-pointer">Book gratis opmåling</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kundeudtalelser -->
+        <section class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-amber-700 font-bold text-xs uppercase tracking-wider block mb-2">Tilfredse kunder</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Hvad siger kunderne om Martin Schmidt?</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <div class="text-amber-500 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-slate-600 italic text-sm mb-6 leading-relaxed">"Martin byggede vores hævede træterrasse i lærk. Finishen og præcisionen i hjørnesamlingerne er i absolut særklasse. Tidsplanen holdt 100%."</p>
+                        <h4 class="font-bold text-slate-900 text-xs">Henrik K., Borup</h4>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <div class="text-amber-500 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-slate-600 italic text-sm mb-6 leading-relaxed">"Vi fik udskiftet døre og vinduer i hele huset. Fantastisk professionelt arbejde, flot oprydning, og listerne indvendigt sidder helt fejlfrit."</p>
+                        <h4 class="font-bold text-slate-900 text-xs">Mette L., Køge</h4>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/60 shadow-sm">
+                        <div class="text-amber-500 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-slate-600 italic text-sm mb-6 leading-relaxed">"Fik specialbygget en reolvæg til stuen på skræddersyede mål. Snedkerarbejdet er helt eminent, og alle detaljer er tænkt igennem."</p>
+                        <h4 class="font-bold text-slate-900 text-xs">Jacob P., Roskilde</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= UNDERSIDE: VORES YDELSER ================= -->
+    <main id="page-ydelser" class="page-section flex-grow">
+        <section class="py-16 sm:py-24 bg-slate-900 text-white relative">
+            <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Professionelle Håndværksydelser</h1>
+                <p class="text-slate-300 text-lg max-w-2xl mx-auto">Vi klarer både store, tunge tømreropgaver og de mest detaljerede snedkerprojekter, der kræver millimeterpræcision.</p>
+            </div>
+        </section>
+
+        <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <!-- Tømrerarbejde -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/60 shadow-md flex flex-col h-full">
+                    <div class="h-56 bg-slate-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Tømrerarbejde" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center mb-6 text-xl font-bold"><i class="fa-solid fa-hammer"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-950 mb-4">Tømrerarbejde</h3>
+                            <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Lægning af nyt tag & tagrenovering</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Udskiftning af døre, vinduer & termoruder</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Montering og lægning af trægulve</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Carporte, garager, skure & hegn</li>
+                            </ul>
+                        </div>
+                        <a href="#kontakt" onclick="navigateTo('kontakt'); document.getElementById('kontakt-subject').value = 'Tømrerarbejde';" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider block transition-colors">Indhent Tilbud</a>
+                    </div>
+                </div>
+
+                <!-- Snedkerarbejde -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/60 shadow-md flex flex-col h-full">
+                    <div class="h-56 bg-slate-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1455734729978-db1ae4f687fc?auto=format&fit=crop&w=600&q=80" alt="Snedkerarbejde" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center mb-6 text-xl font-bold"><i class="fa-solid fa-compass-drafting"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-950 mb-4">Snedkerarbejde</h3>
+                            <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Specialfremstillede reoler på præcise mål</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Skræddersyede radiatorskjulere</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Inventartilpasning & køkkenmontering</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Unikke plankeborde og møbeldetaljer</li>
+                            </ul>
+                        </div>
+                        <a href="#kontakt" onclick="navigateTo('kontakt'); document.getElementById('kontakt-subject').value = 'Snedkerarbejde';" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider block transition-colors">Indhent Tilbud</a>
+                    </div>
+                </div>
+
+                <!-- Træterrasser -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/60 shadow-md flex flex-col h-full">
+                    <div class="h-56 bg-slate-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=600&q=80" alt="Træterrasser" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center mb-6 text-xl font-bold"><i class="fa-solid fa-tree"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-950 mb-4">Uderum & Terrasser</h3>
+                            <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Hårdttræsterrasser (Ipé, Cumaru m.m.)</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Terrasser i lærk og trykimprægneret fyr</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Overdækkede terrasser & hyggelige pergoler</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Udestuer og udendørs opbygninger</li>
+                            </ul>
+                        </div>
+                        <a href="#kontakt" onclick="navigateTo('kontakt'); document.getElementById('kontakt-subject').value = 'Uderum / Terrasser';" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider block transition-colors">Indhent Tilbud</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= UNDERSIDE: PORTFOLIO ================= -->
+    <main id="page-projekter" class="page-section flex-grow">
+        <section class="py-16 sm:py-24 bg-amber-950 text-[#faf9f6] text-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <span class="text-amber-400 font-bold text-xs uppercase tracking-wider block mb-2">Vores udførte arbejde</span>
+                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Se vores afsluttede projekter</h1>
+                <p class="text-amber-200/70 text-base max-w-xl mx-auto font-light">Billeder af reelle tømrer- og snedkeropgaver udført med stor faglig stolthed over hele Sjælland.</p>
+            </div>
+        </section>
+
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Dynamisk Filter -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="filterProjects('alle')" class="filter-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-white transition-all cursor-pointer shadow-sm" id="btn-filter-alle">Alle</button>
+                <button onclick="filterProjects('snedker')" class="filter-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition-all cursor-pointer" id="btn-filter-snedker">Snedkerarbejde</button>
+                <button onclick="filterProjects('tomrer')" class="filter-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition-all cursor-pointer" id="btn-filter-tomrer">Tømrerarbejde</button>
+                <button onclick="filterProjects('uderum')" class="filter-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition-all cursor-pointer" id="btn-filter-uderum">Terrasser & Uderum</button>
+            </div>
+
+            <!-- Projekt Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                <!-- Projekt 1 -->
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-200/50 shadow-sm" data-category="uderum">
+                    <div class="h-64 bg-slate-100 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Flot træterrasse" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-amber-700">Træterrasser & Uderum</span>
+                        <h4 class="text-lg font-bold text-slate-900 mt-1">Eksklusiv Ipé Hårdttræsterrasse i to planer</h4>
+                        <p class="text-slate-500 text-xs mt-2 leading-relaxed">Udført med skjulte skruemontager for et fuldstændig rent og luksuriøst udtryk i haven.</p>
+                        <p class="text-[10px] text-slate-400 mt-4"><i class="fa-solid fa-location-dot"></i> Borup</p>
+                    </div>
+                </div>
+
+                <!-- Projekt 2 -->
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-200/50 shadow-sm" data-category="snedker">
+                    <div class="h-64 bg-slate-100 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" alt="Indbygget snedkerarbejde" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-amber-700">Snedkerarbejde</span>
+                        <h4 class="text-lg font-bold text-slate-900 mt-1">Skræddersyet reolsystem indbygget i skråvæg</h4>
+                        <p class="text-slate-500 text-xs mt-2 leading-relaxed">Perfekt millimeter-tilpasning malet professionelt på stedet for optimal pladsudnyttelse.</p>
+                        <p class="text-[10px] text-slate-400 mt-4"><i class="fa-solid fa-location-dot"></i> Roskilde</p>
+                    </div>
+                </div>
+
+                <!-- Projekt 3 -->
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-200/50 shadow-sm" data-category="tomrer">
+                    <div class="h-64 bg-slate-100 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=600&q=80" alt="Nyt tag og renovering" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-amber-700">Tømrerarbejde</span>
+                        <h4 class="text-lg font-bold text-slate-900 mt-1">Gennemgribende tagrenovering på murermestervilla</h4>
+                        <p class="text-slate-500 text-xs mt-2 leading-relaxed">Nyt undertag, smukke teglsten samt komplet efterisolering efter nyeste energikrav.</p>
+                        <p class="text-[10px] text-slate-400 mt-4"><i class="fa-solid fa-location-dot"></i> Køge</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= UNDERSIDE: OM OS ================= -->
+    <main id="page-om-os" class="page-section flex-grow">
+        <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="aspect-square bg-slate-200 rounded-3xl overflow-hidden shadow-xl border border-slate-300">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Tømrermester Martin Schmidt på arbejde" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-slate-900 text-[#faf9f6] p-6 rounded-2xl shadow-2xl border border-slate-800 hidden sm:block">
+                        <p class="text-3xl font-extrabold text-amber-400">20 år</p>
+                        <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 mt-1">Uafbrudt Mestererfaring</p>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-amber-700 font-bold text-xs uppercase tracking-wider block mb-2">Hvem er vi?</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-950 mb-6">Om Martin S Tømrer+Snedker</h1>
+                    
+                    <div class="space-y-6 text-sm text-slate-600 leading-relaxed font-light">
+                        <p>
+                            Siden firmaets grundlæggelse i <strong class="font-semibold text-slate-950">2006</strong> har tømrermester <strong class="font-semibold text-slate-950">Martin Schmidt</strong> haft fokus på én klar ting: Højeste faglige håndværkskvalitet parret med personlig, ærlig kundeservice.
+                        </p>
+                        <p>
+                            Med værksted og base på Græsmarken 23 i Borup dækker vi hele Midtsjælland og Storkøbenhavn. Vi har opbygget en stærk base af trofaste kunder, fordi vi altid overholder vores aftaler, rydder pænt op efter os selv, og afleverer et færdigt resultat, vi stolt kan kigge på i mange år fremover.
+                        </p>
+                        <p class="border-l-2 border-amber-600 pl-4 py-2 italic font-serif text-slate-700 text-base">
+                            "Vi fletter det tunge, solide tømrerarbejde sammen med snedkerens finesse, så vores kunder får løsninger, der både er stærke og smukke."
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200 mt-8 text-center sm:text-left">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">100%</p>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Dækket af Byg Garanti</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">Etabl.</p>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">År 2006</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">Lokalt</p>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Forankret i Borup</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= UNDERSIDE: KONTAKT ================= -->
+    <main id="page-kontakt" class="page-section flex-grow">
+        <section class="py-16 sm:py-24 bg-slate-900 text-white relative">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Lad os drøfte dine planer</h1>
+                <p class="text-slate-300 text-lg max-w-xl mx-auto">Ring direkte eller udfyld formularen. Vi kommer gerne ud og giver et uforpligtende tilbud på din opgave.</p>
+            </div>
+        </section>
+
+        <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Info -->
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-amber-700 font-bold text-xs uppercase tracking-wider block mb-2">Direkte kontakt</span>
+                        <h2 class="text-3xl font-extrabold text-slate-950 mb-4">Martin Schmidt står klar</h2>
+                        <p class="text-slate-600 text-sm leading-relaxed font-light">
+                            Vi svarer hurtigt på både telefon og e-mail. Har du tegninger eller mål klar, må du meget gerne vedhæfte eller beskrive dem nedenfor.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-2xl border border-slate-200/50 shadow-sm">
+                            <div class="w-12 h-12 bg-amber-50 text-amber-800 rounded-xl flex items-center justify-center flex-shrink-0 text-lg"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-bold uppercase tracking-wider">Ring direkte</h4>
+                                <a href="tel:22510587" class="font-extrabold text-slate-900 text-lg hover:text-amber-700 transition-colors">+45 22 51 05 87</a>
+                                <p class="text-[10px] text-slate-500 mt-1">Tast direkte for en uforpligtende snak om dit projekt.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-2xl border border-slate-200/50 shadow-sm">
+                            <div class="w-12 h-12 bg-amber-50 text-amber-800 rounded-xl flex items-center justify-center flex-shrink-0 text-lg"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-bold uppercase tracking-wider">E-mailadresse</h4>
+                                <a href="mailto:snedkermalle@yahoo.dk" class="font-extrabold text-slate-900 text-base sm:text-lg hover:text-amber-700 transition-colors">snedkermalle@yahoo.dk</a>
+                                <p class="text-[10px] text-slate-500 mt-1">Vi besvarer alle skriftlige henvendelser inden for 24 timer.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-2xl border border-slate-200/50 shadow-sm">
+                            <div class="w-12 h-12 bg-amber-50 text-amber-800 rounded-xl flex items-center justify-center flex-shrink-0 text-lg"><i class="fa-solid fa-location-arrow"></i></div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-bold uppercase tracking-wider">Adresse</h4>
+                                <p class="font-extrabold text-slate-900 text-lg">Græsmarken 23, 4140 Borup</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kontaktformular -->
+                <div class="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/60 shadow-lg">
+                    <h3 class="text-2xl font-bold text-slate-950 mb-6">Send os en besked</h3>
+                    
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Navn</label>
+                                <input type="text" id="kontakt-navn" required class="w-full bg-[#faf9f6] border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-amber-600 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Telefonnummer</label>
+                                <input type="tel" id="kontakt-telefon" required class="w-full bg-[#faf9f6] border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-amber-600 transition-colors">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">E-mailadresse</label>
+                            <input type="email" id="kontakt-email" required class="w-full bg-[#faf9f6] border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-amber-600 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Opgavetype</label>
+                            <select id="kontakt-subject" class="w-full bg-[#faf9f6] border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-amber-600 transition-colors">
+                                <option value="Generel besked">Spørgsmål / Generel besked</option>
+                                <option value="Tømrerarbejde">Tømrerarbejde</option>
+                                <option value="Snedkerarbejde">Snedkerarbejde</option>
+                                <option value="Uderum / Terrasser">Træterrasse / Uderum</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Beskrivelse af opgaven</label>
+                            <textarea id="kontakt-message" rows="5" required placeholder="Fortæl os kort om dine ønsker og tidsramme..." class="w-full bg-[#faf9f6] border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-amber-600 transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-all shadow-lg uppercase tracking-wider text-xs cursor-pointer">
+                            Send forespørgsel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ================= BYG GARANTI TRYSFOOTER ================= -->
+    <section class="bg-amber-950 text-amber-50 py-12 border-t border-amber-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            <div>
+                <h3 class="text-xl font-bold uppercase tracking-wide">Martin S</h3>
+                <p class="text-xs text-amber-300 mt-1 uppercase tracking-widest font-semibold">Tømrer + Snedker v/Martin Schmidt</p>
+            </div>
+            <div class="flex flex-col items-center justify-center p-4 bg-amber-900/40 rounded-2xl border border-amber-800">
+                <i class="fa-solid fa-shield-halved text-3xl text-amber-400 mb-2"></i>
+                <h4 class="font-bold text-sm">Medlem af Byg Garanti</h4>
+                <p class="text-[10px] text-amber-200/70 mt-0.5 max-w-xs leading-relaxed text-center">
+                    Sikrer dit arbejde mod fejl og mangler op til 150.000 kr. hos private forbrugere.
+                </p>
+            </div>
+            <div class="md:text-right text-xs text-amber-300 space-y-1">
+                <p class="font-bold uppercase tracking-wider">Hurtig kontakt</p>
+                <p class="text-white font-semibold">Tlf: 22 51 05 87</p>
+                <p class="text-amber-200/60">E-mail: snedkermalle@yahoo.dk</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-500 py-6 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 Martin S Tømrer+Snedker v/Martin Schmidt. CVR: 29485798. Alle rettigheder forbeholdes.</p>
+        </div>
+    </footer>
+
+
+    <!-- ================= INBYGGET ROUTER OG KALKULATOR LOGIK ================= -->
+    <script>
+        // NAVIGATION UNDERSIDER (Klientside-router)
+        function navigateTo(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) targetPage.classList.add('active');
+
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                link.classList.remove('text-amber-700', 'active-nav', 'font-bold');
+                link.classList.add('text-slate-600');
+            });
+
+            const activeLink = document.getElementById('nav-' + pageId);
+            if (activeLink) {
+                activeLink.classList.remove('text-slate-600');
+                activeLink.classList.add('text-amber-700', 'active-nav', 'font-bold');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Håndter URL-hashes ved indlæsning
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && ['forside', 'ydelser', 'projekter', 'om-os', 'kontakt'].includes(hash)) {
+                navigateTo(hash);
+            } else {
+                navigateTo('forside');
+            }
+        });
+
+        // MOBIL MENUBAR TOGGLE
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-2xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-2xl';
+            }
+        }
+
+        // GALLERI / PORTFOLIO FILTER
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const btns = document.querySelectorAll('.filter-btn');
+            
+            btns.forEach(btn => {
+                btn.className = 'filter-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition-all cursor-pointer';
+            });
+
+            document.getElementById('btn-filter-' + category).className = 'filter-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-white transition-all cursor-pointer shadow-sm';
+
+            cards.forEach(card => {
+                if (category === 'alle' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 50);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        // PRISBEREGNER LOGIK
+        let basePrice = 0, size = 0, factor = 1.0;
+
+        function changeStep(stepNum) {
+            document.querySelectorAll('.step-container').forEach(s => s.classList.add('hidden'));
+            document.getElementById('step' + stepNum).classList.remove('hidden');
+            document.querySelectorAll('.step-indicator').forEach((ind, idx) => {
+                ind.classList.toggle('text-amber-400', idx + 1 <= stepNum);
+            });
+        }
+
+        function selectCalcProject(type, price) {
+            basePrice = price;
+            document.getElementById('calc-dim-label').innerText = type === 'hegn' ? 'Antal løbende meter (lbm)' : 'Antal kvadratmeter (m²)';
+            document.getElementById('calc-size').value = type === 'hegn' ? 15 : 25;
+            changeStep(2);
+        }
+
+        function processStep2() {
+            size = parseFloat(document.getElementById('calc-size').value) || 0;
+            if (size <= 0) { alert('Indtast venligst et gyldigt tal over 0.'); return; }
+            changeStep(3);
+        }
+
+        function selectCalcMaterial(quality, matFactor) {
+            factor = matFactor;
+            const total = Math.round(basePrice * size * factor);
+            document.getElementById('calc-final-price').innerText = total.toLocaleString('da-DK') + ',- kr.';
+            changeStep(4);
+        }
+
+        function resetCalc() {
+            basePrice = 0; size = 0; factor = 1.0;
+            changeStep(1);
+        }
+
+        // FORMULAR INDSENDELSE MED INTERAKTIV TOAST FEEDBACK
+        function showToast(title, desc) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = desc;
+            t.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => t.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none'), 6000);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast("Mange tak!", "Din forespørgsel er modtaget. Martin Schmidt kontakter dig lynhurtigt.");
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
